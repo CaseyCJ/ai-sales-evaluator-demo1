@@ -1,0 +1,103 @@
+/* 售后服务质量评估 - 简洁稳定版
+   替换 src/style.css；无需改动 Vue 组件。 */
+
+:root {
+  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+  color: #26384f;
+  background: #f1f4f8;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+#app { width: 100%; max-width: 1160px; margin: 0 auto; padding: 28px 24px 64px; }
+h1, h2, h3, h4, p { margin-top: 0; }
+h1 { font-size: 27px; margin: 0 0 22px; color: #20334d; }
+h2 { font-size: 18px; margin: 0 0 20px; color: #23364f; }
+h3 { font-size: 15px; margin: 0 0 12px; }
+h4 { font-size: 14px; margin: 0 0 12px; }
+p, li { font-size: 14px; line-height: 1.75; }
+button { font: inherit; color: #35567d; background: #fff; border: 1px solid #d5dfea; border-radius: 8px; padding: 10px 16px; cursor: pointer; }
+button:hover { background: #f2f6fb; }
+
+/* 三个主要结果模块 */
+.overall-assessment,
+.ability-scores,
+.question-rounds {
+  background: #fff;
+  border: 1px solid #e1e7ef;
+  border-radius: 14px;
+  padding: 28px 30px;
+  margin-bottom: 24px;
+}
+/* 兼容父容器未设置 ability-scores 类名的情况 */
+:where(div):has(> .ability-list):not(.ability-scores) {
+  background: #fff;
+  border: 1px solid #e1e7ef;
+  border-radius: 14px;
+  padding: 28px 30px;
+  margin-bottom: 24px;
+}
+
+/* 整体评价 */
+.overall-assessment > p { color: #52647c; margin-bottom: 10px; }
+.assessment-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+.advantages, .weaknesses { min-width: 0; border-radius: 10px; padding: 18px 20px; }
+.advantages { background: #edf7f2; border: 1px solid #dceee4; }
+.weaknesses { background: #fdf7eb; border: 1px solid #f2e8d3; }
+.advantages h3 { color: #237b58; }
+.weaknesses h3 { color: #a36e1f; }
+.advantages ul, .weaknesses ul { padding-left: 20px; margin: 0; }
+.advantages li, .weaknesses li { margin: 6px 0; color: #485d70; }
+
+/* 四项能力：两列、充足行间距、不与下一模块重叠 */
+.ability-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 34px;
+  row-gap: 22px;
+}
+.ability-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  min-height: 62px;
+  padding: 14px 16px;
+  border: 1px solid #e5ebf2;
+  border-radius: 10px;
+  background: #f7f9fc;
+}
+.ability-item span:first-child { flex: 0 0 auto; color: #8b9bb0; font-size: 12px; }
+.ability-item span:nth-child(2) { flex: 1; min-width: 0; font-weight: 600; color: #2e425d; }
+.ability-item span:nth-child(3) { flex: 0 0 auto; font-size: 12px; color: #6b7d93; }
+.ability-item span:last-child { flex: 0 0 auto; font-size: 18px; font-weight: 700; color: #345b8f; white-space: nowrap; }
+/* 去掉旧版伪造的固定长度进度线 */
+.ability-item::before, .ability-item::after { content: none !important; }
+
+/* 客户问题回合 */
+.round-item { border: 1px solid #e2e8f0; border-radius: 11px; padding: 22px; margin-bottom: 16px; }
+.round-item:last-child { margin-bottom: 0; }
+.round-item h3 { color: #2c527b; border-bottom: 1px solid #e9eef4; padding-bottom: 12px; margin-bottom: 14px; }
+.round-item > p { color: #566a83; margin-bottom: 7px; }
+.conversation, .response-analysis, .evidence-analysis { margin-top: 16px; padding: 18px 20px; border-radius: 8px; overflow-wrap: anywhere; }
+.conversation { background: #f1f5fb; border-left: 3px solid #86a7d1; }
+.response-analysis { background: #f5f7fa; border-left: 3px solid #acb9c9; }
+.evidence-analysis { background: #f1f8f4; border-left: 3px solid #90bca4; }
+.conversation p, .response-analysis p, .evidence-analysis p { color: #455a74; margin-bottom: 8px; }
+.conversation p:last-child, .response-analysis p:last-child, .evidence-analysis p:last-child { margin-bottom: 0; }
+
+/* 后续若添加折叠按钮 */
+.round-toggle { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0; border: 0; background: transparent; text-align: left; font-weight: 600; }
+.round-toggle:hover { background: transparent; }
+
+/* 手机与窄窗口 */
+@media (max-width: 700px) {
+  #app { padding: 18px 12px 42px; }
+  .overall-assessment, .ability-scores, .question-rounds,
+  :where(div):has(> .ability-list):not(.ability-scores) { padding: 20px 18px; }
+  .assessment-cards, .ability-list { grid-template-columns: 1fr; gap: 14px; }
+  .round-item { padding: 16px; }
+  .conversation, .response-analysis, .evidence-analysis { padding: 15px; }
+}
